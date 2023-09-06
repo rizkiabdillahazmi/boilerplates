@@ -1,0 +1,10 @@
+version: '1.0'
+
+services:
+  postgresql_container:
+    image: postgres:latest
+    container_name: postgresql_container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 123456

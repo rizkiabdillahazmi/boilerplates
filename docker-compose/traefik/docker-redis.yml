@@ -1,0 +1,22 @@
+version: "1.0"
+
+services:
+  redis:
+    container_name: redis-stack_container
+    image: redis/redis-stack:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.redis.entrypoints=web,websecure"
+      - "traefik.http.routers.redis.rule=Host(`redis.docker.localhost`)"
+      - "traefik.http.services.redis.loadbalancer.server.port=8001"
+      - "traefik.http.routers.redis.service=redis"
+      - "traefik.http.routers.redis.tls=true"
+    networks:
+      - proxy
+    ports:
+      - "6379:6379"
+      
+networks:
+  proxy:
+    external: true

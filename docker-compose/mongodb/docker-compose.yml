@@ -1,0 +1,16 @@
+version: '1.0'
+
+services:
+  mongodb_container:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - MongoDockerData:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+
+volumes:
+  MongoDockerData:

@@ -1,0 +1,21 @@
+version: "1.0"
+
+services:
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 123456
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.pgadmin.entrypoints=web,websecure"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.docker.localhost`)"
+      - "traefik.http.routers.pgadmin.tls=true"
+    networks:
+      - proxy
+      
+networks:
+  proxy:
+    external: true
