@@ -26,10 +26,13 @@ Now, start containers with :
 ```bash
 # Start Traefik
 docker-compose -f docker-compose.yml up -d
+
 # Start Portainer
 docker-compose -f docker-portainer.yml up -d
+
 # Start pgAdmin 4
 docker-compose -f docker-pgadmin4.yml up -d
+
 # Start Redis Stack
 docker-compose -f docker-redis.yml up -d
 ```
