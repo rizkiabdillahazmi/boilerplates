@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  consul:
+    container_name: consul_container
+    image: hashicorp/consul
+    command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
+    ports:
+      - "8600:8600/udp"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.consul.entrypoints=web,websecure"
+      - "traefik.http.routers.consul.rule=Host(`consul.docker.localhost`)"
+      - "traefik.http.services.consul.loadbalancer.server.port=8500"
+      - "traefik.http.routers.consul.tls=true"
+    networks:
+      - proxy
+      
+networks:
+  proxy:
+    external: true
+
